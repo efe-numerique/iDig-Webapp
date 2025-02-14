@@ -38,26 +38,28 @@ export const useDataStore = defineStore("data", {
   }),
 
   getters: {
-    projectPreferencesTypesForSelect(state) {
-      const { lang } = useAppStore();
-      let options = state.projectPreferencesTypes.map((field) => {
-        return {
-          value: field.type,
-          label: field.labels[lang],
-          subtype: field.subtype,
-        };
-      });
-      return options;
-    },
+    // projectPreferencesTypesForSelect(state) {
+    //   const { lang } = useAppStore();
+    //   let options = state.projectPreferencesTypes.map((field) => {
+    //     return {
+    //       value: field.type,
+    //       label: field.labels[lang],
+    //       subtype: field.subtype,
+    //     };
+    //   });
+    //   return options;
+    // },
 
     projectPreferencesTypesForOption(state) {
       const { lang } = useAppStore();
+      if (!state.projectPreferencesTypes) {
+        return [];
+      }
       let options = state.projectPreferencesTypes.map((field) => {
         return {
           label: field.labels[lang],
           value: {
             type: field.type,
-
             subtype: field.subtype,
           },
         };
@@ -67,6 +69,9 @@ export const useDataStore = defineStore("data", {
 
     projectPreferencesTypesTranslation(state) {
       const { lang } = useAppStore();
+      if (!state.projectPreferencesTypes) {
+        return {};
+      }
       let options = {};
       state.projectPreferencesTypes.forEach((field) => {
         options[field.type] = field.labels[lang];
