@@ -362,7 +362,7 @@ export default {
   computed: {
     ...mapState(useDataStore, [
       "projectPreferencesTypes",
-      "projectPreferencesTypesForSelect",
+      // "projectPreferencesTypesForSelect",
       "projectPreferencesTypesTranslation",
       "projectPreferencesFields",
       "projectPreferencesBase64",
@@ -568,8 +568,8 @@ export default {
         surveys,
         preferences
       );
-
-      if (resp.data.status === "pushed") {
+      // regarding the iDig server the response is not always the same
+      if (resp.data.status === "pushed" || resp.data.status === "ok") {
         this.checkedTrenchesVersion[this.currentItem.Trench] =
           resp.data.version;
 
